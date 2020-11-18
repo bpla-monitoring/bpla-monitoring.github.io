@@ -1,1 +1,134 @@
-Привет adsfadsf
+<! DOCTYPE html>
+<html>
+  <head>
+    <title> Краткое руководство по API Google Таблиц </title>
+    <meta charset = "utf-8" />
+  </head>
+  <body>
+    <p> Краткое руководство по API Google Таблиц </p>
+
+    <! - Добавить кнопки для запуска последовательности аутентификации и выхода ->
+    <button id = "authorize_button" style = "display: none;"> Авторизовать </button>
+    <button id = "signout_button" style = "display: none;"> Выйти </button>
+
+    <pre id = "content" style = "white-space: pre-wrap;"> </pre>
+
+    <script type = "text / javascript">
+      // Идентификатор клиента и ключ API из консоли разработчика
+      var CLIENT_ID = '140547621042-6h0moi30vfqc3fn8j41juerfdtfkskfc.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyCq7KAxzdaG92UcumHqDp692BMKO0yu0_g';
+
+      // Массив URL-адресов документов обнаружения API для API, используемых в кратком руководстве
+      var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+
+      // Области авторизации, требуемые API; несколько областей могут быть
+      // включены, разделены пробелами.
+      var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+
+      var authorizeButton = document.getElementById ('authorize_button');
+      var signoutButton = document.getElementById ('signout_button');
+
+      / **
+       * При загрузке, вызывается для загрузки библиотеки auth2 и клиентской библиотеки API.
+       * /
+      function handleClientLoad () {
+        gapi.load ('клиент: auth2', initClient);
+      }
+
+      / **
+       * Инициализирует клиентскую библиотеку API и настраивает состояние входа
+       * слушатели.
+       * /
+      function initClient () {
+        gapi.client.init ({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          DiscoveryDocs: DISCOVERY_DOCS,
+          объем: ОБЪЕМЫ
+        }). then (function () {
+          // Слушаем изменения состояния входа.
+          gapi.auth2.getAuthInstance (). isSignedIn.listen (updateSigninStatus);
+
+          // Обрабатываем начальное состояние входа.
+          updateSigninStatus (gapi.auth2.getAuthInstance (). isSignedIn.get ());
+          authorizeButton.onclick = handleAuthClick;
+          signoutButton.onclick = handleSignoutClick;
+        }, функция (ошибка) {
+          appendPre (JSON.stringify (ошибка, ноль, 2));
+        });
+      }
+
+      / **
+       * Вызывается при изменении статуса входа в систему для обновления пользовательского интерфейса
+       * соответственно. После входа вызывается API.
+       * /
+      function updateSigninStatus (isSignedIn) {
+        if (isSignedIn) {
+          authorizeButton.style.display = 'нет';
+          signoutButton.style.display = 'блок';
+          listMajors ();
+        } else {
+          authorizeButton.style.display = 'блок';
+          signoutButton.style.display = 'нет';
+        }
+      }
+
+      / **
+       * Войдите в систему, нажав кнопку.
+       * /
+      function handleAuthClick (event) {
+        gapi.auth2.getAuthInstance (). signIn ();
+      }
+
+      / **
+       * Выход пользователя из системы после нажатия кнопки.
+       * /
+      function handleSignoutClick (событие) {
+        gapi.auth2.getAuthInstance (). signOut ();
+      }
+
+      / **
+       * Добавить элемент pre к телу, содержащему данное сообщение
+       * как его текстовый узел. Используется для отображения результатов вызова API.
+       *
+       * @param {строка} сообщение Текст, который будет помещен в предварительный элемент.
+       * /
+      function appendPre (message) {
+        var pre = document.getElementById ('контент');
+        var textContent = document.createTextNode (сообщение + '\ n');
+        pre.appendChild (текстовое содержимое);
+      }
+
+      / **
+       * Распечатайте имена и специальности студентов в образце электронной таблицы:
+       * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+       * /
+      function listMajors () {
+        gapi.client.sheets.spreadsheets.values.get ({
+          spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
+          диапазон: 'Данные класса! A2: E',
+        }). then (function (response) {
+          var range = response.result;
+          if (range.values.length> 0) {
+            appendPre ('Имя, майор:');
+            for (i = 0; i <range.values.length; i ++) {
+              var row = range.values ​​[я];
+              // Вывести столбцы A и E, соответствующие индексам 0 и 4.
+              appendPre (строка [0] + ',' + строка [4]);
+            }
+          } else {
+            appendPre ('Данные не найдены.');
+          }
+        }, функция (ответ) {
+          appendPre ('Ошибка:' + response.result.error.message);
+        });
+      }
+
+    </script>
+
+    <сценарий async defer src = "https://apis.google.com/js/api.js"
+      onload = "this.onload = function () {}; handleClientLoad ()"
+      onreadystatechange = "если (this.readyState === 'complete') this.onload ()">
+    </script>
+  </body>
+</html>
