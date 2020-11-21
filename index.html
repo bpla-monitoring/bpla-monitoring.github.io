@@ -5,50 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Example</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+        <style>
+            #mapid { height: 100%; }
+        </style>
 </head>
 
 <body>
-
-<!--<script src="https://script.google.com/macros/s/AKfycbx2lolQNd0Ffg_SA6jZXTorhisTgokEahY5cKbJEVyrtUv21KM/exec?a1=asdfadsfl;k;lk;lk;l"></script> -->
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
     <script>
-    const request = new XMLHttpRequest();
-     
-    /*  Составляем строку запроса и кладем данные, строка состоит из: 
-    пути до файла обработчика ? имя в GET запросе где будет лежать значение запроса id_product и 
-    через & мы передаем количество qty_product. */ 
-    const url = "https://script.google.com/macros/s/AKfycbx2lolQNd0Ffg_SA6jZXTorhisTgokEahY5cKbJEVyrtUv21KM/exec&a1="+"adfadsfadsfadsfdsafadsfsadfdsafdsafa";
-    
-    /* Здесь мы указываем параметры соединения с сервером, т.е. мы указываем метод соединения GET, 
-    а после запятой мы указываем путь к файлу на сервере который будет обрабатывать наш запрос. */ 
-    request.open('GET', url);
-    
-    // Указываем заголовки для сервера, говорим что тип данных, - контент который мы хотим получить должен быть не закодирован. 
-    request.setRequestHeader('Content-Type', 'application/x-www-form-url');
-     
-    // Здесь мы получаем ответ от сервера на запрос, лучше сказать ждем ответ от сервера 
-    request.addEventListener("readystatechange", () => {
-        
-     /*   request.readyState - возвращает текущее состояние объекта XHR(XMLHttpRequest) объекта, 
-     бывает 4 состояния 4-е состояние запроса - операция полностью завершена, пришел ответ от сервера, 
-     вот то что нам нужно request.status это статус ответа, 
-     нам нужен код 200 это нормальный ответ сервера, 401 файл не найден, 500 сервер дал ошибку и прочее...   */
-        if (request.readyState === 4 && request.status === 200) {
-        
-          // выводим в консоль то что ответил сервер
-          console.log( request.responseText );
-        }
-    });
-     
-    // Выполняем запрос 
-    request.send();
-</script>
-
-    <!-- <script>
-        var txt1 = "adf";
-        var txt2 = "adfadsfads";
-        var txt3 = "adfasdfasdfdsaffdf";
-        google.script.run.doSomething(txt1, txt2, txt3);
-    </script> -->
+        var x = 234324;
+        document.write(
+            '<script src="https://script.google.com/macros/s/AKfycbx2lolQNd0Ffg_SA6jZXTorhisTgokEahY5cKbJEVyrtUv21KM/exec?a1=' +
+            x + '"><\/script>');
+    </script>
+<div id="mapid"></div>
 
 </body>
 
@@ -56,4 +32,3 @@
 
 <!-- https://askdev.ru/q/soobschenie-ajax-v-elektronnuyu-tablicu-google-144679/ -->
 <!-- https://www.youtube.com/watch?v=lzofFoAFWWQ -->
-
