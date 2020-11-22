@@ -8,27 +8,96 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin="" />
-        <style>
-            #mapid { height: 100%; }
-        </style>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #mapid {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script> -->
+
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
     <script>
-        var x = 234324;
-        document.write(
-            '<script src="https://script.google.com/macros/s/AKfycbx2lolQNd0Ffg_SA6jZXTorhisTgokEahY5cKbJEVyrtUv21KM/exec?a1=' +
-            x + '"><\/script>');
-    </script>
-<div id="mapid"></div>
+        navigator.geolocation.getCurrentPosition(
+            showPosition); // Запрашиваем местоположение, и в случае успеха вызываем функцию showPosition
+        function showPosition(position) {
 
+            // var script = document.createElement('script');
+
+            // script.src =
+            //     'https://script.google.com/macros/s/AKfycbx2lolQNd0Ffg_SA6jZXTorhisTgokEahY5cKbJEVyrtUv21KM/exec?a1=' +
+            //     position.coords.latitude + '&a2=' + position.coords.longitude;
+
+            // document.getElementsByTagName('head')[0].appendChild(script);
+
+            const url='https://script.google.com/macros/s/AKfycbx2lolQNd0Ffg_SA6jZXTorhisTgokEahY5cKbJEVyrtUv21KM/exec';
+
+            fetch(url)
+            .then(data=>{return data.json()})
+            .then(res=>{console.log(res)})
+
+            var mymap = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 13);
+
+            L.tileLayer(
+                'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                    maxZoom: 18,
+                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    id: 'mapbox/streets-v11',
+                    tileSize: 512,
+                    zoomOffset: -1
+                }).addTo(mymap);
+            L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
+
+
+        }
+
+
+
+
+    </script>
+    <div id="mapid"></div>
+  
 </body>
 
 </html>
 
+<!-- https://www.youtube.com/watch?v=oxqVnWPg0So Работа с FireBase-->
+<!-- https://www.youtube.com/watch?v=kir7tqK3v2Q -->
+<!-- https://www.youtube.com/watch?v=Mykv_Ee1IeU -->
+<!-- https://codepen.io/cpabhi/pen/zYGRNVG -->
 <!-- https://askdev.ru/q/soobschenie-ajax-v-elektronnuyu-tablicu-google-144679/ -->
 <!-- https://www.youtube.com/watch?v=lzofFoAFWWQ -->
+<!-- https://velmaster.ru/blog/12-javascript-jquery/15-otpravka-dannykh-formy-v-tablitsu-google-google-docs -->
+<!-- https://itnan.ru/post.php?c=1&p=343082 -->
+<!-- https://fooobar.com/questions/5367966/getting-data-from-google-docs-into-javascript -->
+<!-- https://pbteamstudio.com/blogs/prostoj-primer-ispolzovaniya-html-v-google-apps-script-na-primere-googlesheet/ -->
+
+<!-- https://ru.stackoverflow.com/questions/685519/%D0%9A%D0%B0%D0%BA%D0%B8%D0%BC-%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%BC-%D1%8F-%D0%BC%D0%BE%D0%B3%D1%83-%D0%B2%D1%8B%D0%B7%D1%8B%D0%B2%D0%B0%D1%82%D1%8C-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-google-apps-script-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%BC-%D1%81%D0%B0%D0%B9%D1%82%D0%B5 -->
+
+<!-- https://jsfiddle.net/2fq5ybzk/6/ -->
+
+var url = "https://docs.google.com/spreadsheet/pub?key=p_aHW5nOrj0VO2ZHTRRtqTQ&single=true&gid=0&range=A1&output=csv";
+xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function () {
+    if (xmlhttp.readyState == 4) {
+        document.getElementById("display").innerHTML = xmlhttp.responseText;
+        //alert(xmlhttp.responseText);
+    }
+};
+xmlhttp.open("GET", url, true);
+xmlhttp.send(null);
+}
