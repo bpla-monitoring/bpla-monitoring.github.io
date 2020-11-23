@@ -22,6 +22,8 @@
 
 <body>
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script> -->
 
@@ -33,20 +35,65 @@
         navigator.geolocation.getCurrentPosition(
             showPosition); // Запрашиваем местоположение, и в случае успеха вызываем функцию showPosition
         function showPosition(position) {
+            // $.getJSON(
+            //     "http://cors.io/spreadsheets.google.com/feeds/list/0AtMEoZDi5-pedElCS1lrVnp0Yk1vbFdPaUlOc3F3a2c/od6/public/values?alt=json",
+            //     function (data) {
+            //         //first row "title" column
+            //         console.log(data.feed.entry[0]['gsx$title']['$t']);
+            //     });
 
-            // var script = document.createElement('script');
+           
+            var script = document.createElement('script');
+            script.src =
+                'https://script.google.com/macros/s/AKfycbx2lolQNd0Ffg_SA6jZXTorhisTgokEahY5cKbJEVyrtUv21KM/exec?a1=' +
+                 'A1' + '&a2=' + '34';
+            document.getElementsByTagName('head')[0].appendChild(script);
 
-            // script.src =
-            //     'https://script.google.com/macros/s/AKfycbx2lolQNd0Ffg_SA6jZXTorhisTgokEahY5cKbJEVyrtUv21KM/exec?a1=' +
-            //     position.coords.latitude + '&a2=' + position.coords.longitude;
+//https://pandia.ru/text/82/162/22560.php
+// //----------------------------------------Это по идее работает--------------------                    
+//         var http = new XMLHttpRequest();
+//         var url = "https://script.google.com/macros/s/AKfycbx2lolQNd0Ffg_SA6jZXTorhisTgokEahY5cKbJEVyrtUv21KM/exec";
+//         var params = "a1="+"A2"+"&a2="+"345";
+//         http.open("GET", url+"?"+params, true);
+//         http.onreadystatechange = function() {
+//             if(http.readyState == 4 && http.status == 200) {
+//                 //alert(http.responseText);
+//             }
+//         }
+//         http.send(null);
 
-            // document.getElementsByTagName('head')[0].appendChild(script);
 
-            const url='https://script.google.com/macros/s/AKfycbx2lolQNd0Ffg_SA6jZXTorhisTgokEahY5cKbJEVyrtUv21KM/exec';
 
-            fetch(url)
-            .then(data=>{return data.json()})
-            .then(res=>{console.log(res)})
+
+
+            // fetch('https://script.google.com/macros/s/AKfycbx2lolQNd0Ffg_SA6jZXTorhisTgokEahY5cKbJEVyrtUv21KM/exec', {
+            //             mode: 'no-cors'
+            //         })
+            //     .then((response) => {
+            //         return response.json();
+            //     })
+            //     .then((data) => {
+            //         console.log(data);
+            //     });
+
+            // $.get('https://script.google.com/macros/s/AKfycbx2lolQNd0Ffg_SA6jZXTorhisTgokEahY5cKbJEVyrtUv21KM/exec', {
+            //         query: 'test'
+            //     },{
+            //          mode: 'no-cors'
+            //         }, function (data) {
+            //         console.log(data); // ответ от сервера
+            //     })
+            //     .success(function () {
+            //         console.log('Успешное выполнение');
+            //     })
+            //     .error(function (jqXHR) {
+            //         console.log('Ошибка выполнения');
+            //     })
+            //     .complete(function () {
+            //         console.log('Завершение выполнения');
+            //     });
+
+            // https://docs.google.com/spreadsheets/d/e/2PACX-1vTy1g1kjo-P5y5SMZKHSrtn6_DL-HcRU-jd-5EVyeXtzlfYL1t0N7dFLMpiifUc9jcYAfjBR6FFiAR6/pubhtml
 
             var mymap = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 13);
 
@@ -64,40 +111,9 @@
 
 
         }
-
-
-
-
     </script>
     <div id="mapid"></div>
-  
+
 </body>
 
 </html>
-
-<!-- https://www.youtube.com/watch?v=oxqVnWPg0So Работа с FireBase-->
-<!-- https://www.youtube.com/watch?v=kir7tqK3v2Q -->
-<!-- https://www.youtube.com/watch?v=Mykv_Ee1IeU -->
-<!-- https://codepen.io/cpabhi/pen/zYGRNVG -->
-<!-- https://askdev.ru/q/soobschenie-ajax-v-elektronnuyu-tablicu-google-144679/ -->
-<!-- https://www.youtube.com/watch?v=lzofFoAFWWQ -->
-<!-- https://velmaster.ru/blog/12-javascript-jquery/15-otpravka-dannykh-formy-v-tablitsu-google-google-docs -->
-<!-- https://itnan.ru/post.php?c=1&p=343082 -->
-<!-- https://fooobar.com/questions/5367966/getting-data-from-google-docs-into-javascript -->
-<!-- https://pbteamstudio.com/blogs/prostoj-primer-ispolzovaniya-html-v-google-apps-script-na-primere-googlesheet/ -->
-
-<!-- https://ru.stackoverflow.com/questions/685519/%D0%9A%D0%B0%D0%BA%D0%B8%D0%BC-%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%BC-%D1%8F-%D0%BC%D0%BE%D0%B3%D1%83-%D0%B2%D1%8B%D0%B7%D1%8B%D0%B2%D0%B0%D1%82%D1%8C-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-google-apps-script-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%BC-%D1%81%D0%B0%D0%B9%D1%82%D0%B5 -->
-
-<!-- https://jsfiddle.net/2fq5ybzk/6/ -->
-
-var url = "https://docs.google.com/spreadsheet/pub?key=p_aHW5nOrj0VO2ZHTRRtqTQ&single=true&gid=0&range=A1&output=csv";
-xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState == 4) {
-        document.getElementById("display").innerHTML = xmlhttp.responseText;
-        //alert(xmlhttp.responseText);
-    }
-};
-xmlhttp.open("GET", url, true);
-xmlhttp.send(null);
-}
