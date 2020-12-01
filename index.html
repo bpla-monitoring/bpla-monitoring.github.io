@@ -29,7 +29,8 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
     <script>
-        alert(document.domain);
+       if (document.domain==='alexpyatunin.github.io')
+       {
         navigator.geolocation.getCurrentPosition(
             showPosition); // Запрашиваем местоположение, и в случае успеха вызываем функцию showPosition
         function showPosition(position) {
@@ -46,6 +47,10 @@
                     zoomOffset: -1
                 }).addTo(mymap);
             L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
+        }
+        else
+        {
+            alert('Иди нахуй');
         }
 
         var one = function (callback) {
