@@ -1,46 +1,74 @@
 <!DOCTYPE html>
 <html lang="ru">
-<!--Язык документа по умолчанию-->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Google Example</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
     <style>
-        /* Здесь стили */
+        body {
+            margin: 0;
+        }
+
+        #mapid {
+            width: 100vw;
+            height: 100vh;
+        }
     </style>
 </head>
 
 <body>
-    a = <input type="text" value="50" id="a">
-    b = <input type="text" value="50" id="b">
-    c = <input type="text" value="50" id="c">
+    <button onclick="F2()">Ok</button>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
-    <button onclick="F1()">Ok</button>
-    <div id="block1"></div>
-    <div id="result"></div>
-
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
     <script>
-        function F1() {
-            var a = document.getElementById('a').value;
-            var b = document.getElementById('b').value;
-            var c = document.getElementById('c').value;
+        alert(document.domain);
+        navigator.geolocation.getCurrentPosition(
+            showPosition); // Запрашиваем местоположение, и в случае успеха вызываем функцию showPosition
+        function showPosition(position) {
+            one(two);
+            var mymap = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 13);
+            L.tileLayer(
+                'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                    maxZoom: 18,
+                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    id: 'mapbox/streets-v11',
+                    tileSize: 512,
+                    zoomOffset: -1
+                }).addTo(mymap);
+            L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
+        }
 
-            var D = b * b - 4 * a * c;
-            document.getElementById('block1').innerHTML = D;
+        var one = function (callback) {
+            $.get(
+                'https://script.google.com/macros/s/AKfycbx2lolQNd0Ffg_SA6jZXTorhisTgokEahY5cKbJEVyrtUv21KM/exec?a1=B2&a2=34'
+            );
+            setTimeout(function () {
+                callback();
+            }, 1000);
+        }
 
-            if (D < 0) {
-                document.getElementById('result').innerHTML = 'решений нет';
-            }
-            if (D>=0) {
-                var x1=(-b+Math.sqrt(D))/(2*a);
-                var x2=(-b-Math.sqrt(D))/(2*a);
-                document.getElementById('result').innerHTML = x1+','+x2;
-            }
-
+        var two = function () {
+            $.getJSON(
+                "https://spreadsheets.google.com/feeds/list/15UkJ5OtRVc3_YnwRLTBai8pUmG9sroSR9JqYwSQCkGA/od6/public/values?alt=json",
+                function (data) {
+                    //first row "title" column
+                    console.log(data.feed.entry[0]);
+                    //.gsx$_cokwr.$t
+                });
         }
     </script>
-
+    <div id="mapid"></div>
+    <button onclick="F2()">Ok</button>
 </body>
 
 </html>
