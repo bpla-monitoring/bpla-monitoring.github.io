@@ -1,5 +1,5 @@
 F1();
 function F1() {
-    var a=document.domain;
+    var a=this.document.domain;
     return a;
 }
