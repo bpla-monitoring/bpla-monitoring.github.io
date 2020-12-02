@@ -1,1 +1,1 @@
-console.log(document.domain);
+console.log('Жопааа');
