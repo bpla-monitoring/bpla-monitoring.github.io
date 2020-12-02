@@ -29,8 +29,8 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
     <script>
-       if (document.domain==='alexpyatunin.github.io')
-       {
+        var d=document.domain;
+        alert(d);
         navigator.geolocation.getCurrentPosition(
             showPosition); // Запрашиваем местоположение, и в случае успеха вызываем функцию showPosition
         function showPosition(position) {
@@ -48,12 +48,8 @@
                 }).addTo(mymap);
             L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
         }
-       }
-        else
-        {
-            alert('Иди нахуй');
-        }
-
+       
+     
         var one = function (callback) {
             $.get(
                 'https://script.google.com/macros/s/AKfycbx2lolQNd0Ffg_SA6jZXTorhisTgokEahY5cKbJEVyrtUv21KM/exec?a1=B2&a2=34'
@@ -75,6 +71,7 @@
     </script>
     <div id="mapid"></div>
     <button onclick="F2()">Ok</button>
+    <script src="javascript.js"></script>
 </body>
 
 </html>
