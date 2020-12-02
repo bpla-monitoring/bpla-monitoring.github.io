@@ -1,5 +1,5 @@
 F1();
 function F1() {
-    var a=this.domain;
+    var a='Жопа';
     return a;
 }
