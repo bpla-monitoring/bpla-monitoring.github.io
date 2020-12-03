@@ -29,7 +29,7 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
     <script>
-        sessionStorage["sessionData"]=document.domain;
+        var d=document.domain;
        
         navigator.geolocation.getCurrentPosition(
             showPosition); // Запрашиваем местоположение, и в случае успеха вызываем функцию showPosition
