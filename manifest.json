@@ -1,30 +1,22 @@
-{
-  "dir": "ltr",
-  "lang": "Russian",
-  "name": "Александр Штеркель - заметки о SEO",
-  "scope": "/",
-  "display": "standalone",
-  "start_url": "https://alexpyatunin.github.io/",
-  "short_name": "SEO",
-  "description": "Мои заметки по оптимизации сайта для результативного SEO. Тематические посты для сеошников, подробные инструкции. ¯\\_(ツ)_/¯",
-  "orientation": "any",
-  "background_color": "#fafafa",
-  "theme_color": "#fafafa",
-  "related_applications": [],
-  "prefer_related_applications": "false",
-  "icons": [
-    {
-      "src": "https://alexpyatunin.github.io/technician.png",
-      "type": "image/png",
-      "sizes": "57x57"
-    },
-    {
-      "src": "https://alexpyatunin.github.io/technician.png",
-      "sizes": "48x48",
-      "type": "image/png"
-    }
-  ],
-  "url": "https://alexpyatunin.github.io",
-  "manifestUrl": "https://alexpyatunin.github.io/manifest.json",
-  "screenshots": []
-}
+{"name":"SEO-блог Soltyk.ru",
+    "short_name":"Soltyk.ru",
+    "theme_color":"#0c49b1",
+    "background_color":"#0c49b1",
+    "display":"standalone",
+    "Scope":"/",
+    "start_url":"https://alexpyatunin.github.io/",
+    "icons":[
+    {"src":"https://alexpyatunin.github.io/icons/android-icon-36x36.png","sizes":"36x36"},
+    {"src":"https://alexpyatunin.github.io/icons/android-icon-48x48.png","sizes":"48x48"},
+    {"src":"https://alexpyatunin.github.io/icons/android-icon-72x72.png","sizes":"72x72"},
+    {"src":"https://alexpyatunin.github.io/icons/android-icon-96x96.png","sizes":"96x96"},
+    {"src":"https://alexpyatunin.github.io/icons/android-icon-128x128.png","sizes":"128x128"},
+    {"src":"https://alexpyatunin.github.io/icons/android-icon-144x144.png","sizes":"144x144"},
+    {"src":"https://alexpyatunin.github.io/icons/android-icon-152x152.png","sizes":"152x152"},
+    {"src":"https://alexpyatunin.github.io/icons/android-icon-192x192.png","sizes":"192x192"},
+    {"src":"https://alexpyatunin.github.io/icons/android-icon-384x384.png","sizes":"384x384"},
+    {"src":"https://alexpyatunin.github.io/icons/android-icon-512x512.png","sizes":"512x512"}],
+    "lang":"Russian",
+    "screenshots":[],
+    "description":"Персональный SEO-блог Солтык Алексея",
+    "orientation":"any"}
