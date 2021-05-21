@@ -1,21 +1,29 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <script type="text/javascript" src="jquery-3.5.1.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width initial-scale=1">
 
-    <script type="text/javascript" src="multirotors.js"></script>
-    <script type="text/javascript" src="planes.js"></script>
-    <script type="text/javascript" src="helicopters.js"></script>
+<link rel="apple-touch-icon" sizes="57x57" href="icons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="icons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="icons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="icons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="icons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="icons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="icons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="icons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
 
-    <script type="text/javascript" src="multirotorsp.js"></script>
-    <script type="text/javascript" src="planesp.js"></script>
-    <script type="text/javascript" src="helicoptersp.js"></script>
+<meta name="msapplication-TileColor" content="#E6E6FA">
+<meta name="msapplication-TileImage" content="icons/ms-icon-144x144.png">
+<meta name="theme-color" content="#E6E6FA">
 
-    <link rel="manifest" href="/manifest.json">
+
+<link rel="manifest" href="/manifest.json">
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
@@ -30,523 +38,31 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 
+  <title>Web Community Leads</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="style/style.css">
+  <script src="https://use.fontawesome.com/4ca20d00e4.js"></script>
 </head>
-
 <body>
-    <div id="main">
-        <h1>Мониторинг БПЛА</h1>
-        <br>
-        <p align="center">
-            Мониторинг | <a href="prognoz.html">Прогнозирование</a>
+  <div class="container">
+    <div class="box">
+      <h1>Web Community Leads UK and IE</h1>
+      <br>
+      <p>Web Community Leads UK and IE is a network of people who run meet up groups or similar events focused around web technologies.
+      <br>It exists to help event organisers to share resources and ask for advice when needed.</p>
 
-        </p>
-        <br>
-        <p>
-            Открыть карту (*.bmp,*.jpg,*.png, *.gif)
-            <input class="open" type="file" id="Open" required="required" title="Необходимо выбрать минимум один файл"
-                onchange="processFiles(this.files)">
-        </p>
-
-
-        <div id="maptxt"></div>
-
-        <br>
-        Масштаб карты: 1 см = <input type="text" id="mH" value="10" size="5"> м
-        <button id="SetmH" onclick="SetmH()">Применить масштаб</button>
-        <span id="size"></span>
-        <br>
-        <br>
-        <button onclick="HideGrid()">Очистить</button>
-        <button onclick="M()">Завершить и принять</button>
-        <br>
-        <br>
-        <div id="map">
-            <div id="cnv">
-                <canvas id="img_canvas"></canvas>
-                <canvas id="point_canvas"></canvas>
-
-            </div>
-        </div>
-        <br>
-
-        <div id="info">
-            Траектория:
-            <br>
-            <br>
-            <table id="trajectory" class="marsh">
-
-            </table>
-            <br>
-            <br>
-            Тип БПЛА: <select id="type">
-                <option value="Мультиротор">Мультиротор</option>
-                <option value="Самолет">Самолет</option>
-                <option value="Вертолет">Вертолет</option>
-
-            </select>
-            <br>
-            <br>
-            Выбор модели БПЛА: <select id="bpla"></select>
-            <br>
-            <br>
-            <table id="ver" class="marsh"></table><br>
-            Масса полезной нагрузки, кг: <span id="bplam"></span><br><br>
-            Время работы БПЛА, ч: <span id="bplat"></span><br><br>
-            Максисмальная высота БПЛА, м: <span id="bplah"></span><br><br>
-            Радиус действия радиоканала, км: <span id="bplar"></span><br><br>
-            Время оперативного реагирования, мин: <span id="bplatr"></span><br>
-            <br>
-            T<sub>1</sub> = <input id="t1" type="text" value="10">
-            T<sub>2</sub> = <input id="t2" type="text" value="20">
-            T<sub>3</sub> = <input id="t3" type="text" value="30">
-            T<sub>4</sub> = <input id="t4" type="text" value="40">
-            <br>
-            <br>
-            <button onclick="Res()">Рассчитать</button>
-            <br>
-            <br>
-            Количество БПЛА = <span id="nbpla"></span>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+      <h3>How to get involved</h3>
+      <ol>
+        <li>Read though our <a href="https://github.com/webcommunityukie/Code-of-Conduct"><i class="fa fa-bolt"></i> Code of Conduct</a>.</li>
+        <li>Visit our <a href="https://webcommunityukie.slack.com"><i class="fa fa-slack"></i> Slack</a>, if you can track down someone already involved ask them to invite you and if you can't you are still welcome to join, details of how to can be found <a href="https://docs.google.com/document/d/1-9mtynxQfA445qTM_VRSfMJbkMKsoBKLiIFpTCPK_F4/edit?usp=sharing">here.</a></li>
+        <li>Check out all the <a href="https://drive.google.com/drive/u/1/folders/0B1OSazPpPBanODA3RGIxc0xiQ0k"><i class="fa fa-file-o"></i> Information and Resources</a> our community has compiled on running events.</li>
+        <li>Sign up to our <a href="http://eepurl.com/dAaFmv"><i class="fa fa-envelope"></i> newsletter</a> for updates.</li>
+      </ol>
+      <footer>
+        <a href="https://github.com/webcommunityukie/webcommunityukie.github.io">Code on GitHub</a>
+        <a href="http://goldsmiths.tech">Inspired by Hacksmiths</a>
+      </footer>
     </div>
-    <script>
-        var img; //изображение
-        var img_canvas, point_canvas; //канва
-        var img_context, point_context; //контексты 
-        var width, height; //размеры изображения в пикселах
-        var widthcm, heightcm; //размеры изображения в сантиметрах
-        var mH; //масштаб
-        var mx = []; //координаты точек маршрута
-        var my = [];
-        var point_count = 0;
-        var number = []; //номер точки маршрута
-        var tempX;
-        var tempY;
-        var t = 0; // количество узлов одного маршрута
-        var dist = []; // массив дистанций
-        var summa = 0;
-        var r = 1; // количество маршрутов           
-
-
-        window.addEventListener('DOMContentLoaded', function () {
-            img_canvas = document.getElementById("img_canvas");
-            img_context = img_canvas.getContext("2d");
-            point_canvas = document.getElementById("point_canvas");
-            point_context = point_canvas.getContext("2d");
-            LoadFile();
-            document.getElementById('info').style.display = 'none';
-
-            var c = '';
-                c = c + '<tr>';
-                c = c + '<td>Наименование</td>';
-                c = c + '<td>Ожидаемое время работы</td>';
-                c = c + '<td>Среднее время работы</td>';
-                c = c + '<td>P=0.25</td>';
-                c = c + '<td>P=0.5</td>';
-                c = c + '<td>P=0.75</td>';
-                c = c + '<td>P=0.99</td>';
-                c = c + '</tr>';
-                c = c + '<tr>';
-                c = c + '<td>' + multirotorsp[0].name + '</td>';
-                c = c + '<td>' + multirotorsp[0].to + '</td>';
-                c = c + '<td>' + multirotorsp[0].ts + '</td>';
-                c = c + '<td>' + multirotorsp[0].P1 + '</td>';
-                c = c + '<td>' + multirotorsp[0].P2 + '</td>';
-                c = c + '<td>' + multirotorsp[0].P3 + '</td>';
-                c = c + '<td>' + multirotorsp[0].P4 + '</td>';
-
-                c = c + '</tr>';
-                document.getElementById('ver').innerHTML = c;
-
-            var b = '';
-            for (name in multirotors) {
-                console.log(multirotors[name].name);
-                b = b + '<option value="' + multirotors[name].name + '">' + multirotors[name].name +
-                    '</option>';
-            }
-            document.getElementById('bpla').innerHTML = b;
-            $("#bplam").text(multirotors[0].m);
-            $("#bplat").text(multirotors[0].tmax);
-            $("#bplah").text(multirotors[0].h);
-            $("#bplar").text(multirotors[0].r);
-            $("#bplatr").text(multirotors[0].tr);
-        });
-
-        $('#point_canvas').click(function (e) {
-
-            SetPoint(e);
-
-        });
-
-        function LoadFile() {
-            // Создаем объект изображения
-            var img = new Image();
-
-            // Привязываем функцию к событию onload
-            // Это указывает браузеру, что делать, когда изображение загружено
-            img.onload = function () {
-                img_canvas.width = img.width;
-                img_canvas.height = img.height;
-
-                point_canvas.width = img.width;
-                point_canvas.height = img.height;
-
-                img_context.drawImage(img, 0, 0);
-
-                width = img.width;
-                height = img.height;
-
-                GetSize(width, height);
-                SetmH();
-            };
-
-            // Загружаем файл изображения
-            img.src = "map3.PNG";
-        }
-
-        function processFiles(files) {
-            var file = files[0];
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                img = new Image();
-                img.onload = function () {
-                    img_canvas.width = img.width;
-                    img_canvas.height = img.height;
-
-                    point_canvas.width = img.width;
-                    point_canvas.height = img.height;
-
-                    img_context.drawImage(img, 0, 0);
-
-                    width = img.width;
-                    height = img.height;
-
-                    GetSize(width, height);
-                    SetmH();
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function GetSize(width, height) {
-            widthcm = Math.round(100 * width * 2.54 / 96) / 100;
-            heightcm = Math.round(100 * height * 2.54 / 96) / 100;
-            document.getElementById('maptxt').innerHTML = 'Размер изображения: ' + width + 'px x ' +
-                height +
-                'px<br><br>Реальный размер карты: ' + widthcm.toString() + 'cм x ' +
-                heightcm.toString() + 'см (при печати 96dpi)';
-        }
-
-        function SetmH() {
-            mH = $('#mH').val();
-            $('#size').text('Размеры области: ' + (mH * widthcm).toFixed(2) + 'м x ' + (mH * heightcm).toFixed(2) +
-                'м');
-        }
-
-        function SetPoint(e) {
-            var x = e.offsetX;
-            var y = e.offsetY;
-            if (point_count === 0) {
-                circle2(x, y, 10, 'green');
-                SetText(x, y);
-            } else {
-                circle2(x, y, 5, 'red');
-                line2(tempX, tempY, x, y);
-                SetText(x, y);
-            }
-            tempX = x;
-            tempY = y;
-            mx[point_count] = x;
-            my[point_count] = y;
-            point_count++;
-        }
-
-        function HideGrid() {
-            point_context.clearRect(0, 0, width, height);
-            point_count = 0;
-            tempX = 0;
-            tempY = 0;
-            summa = 0;
-            mx = [];
-            my = [];
-            dist = [];
-            document.getElementById('info').style.display = 'none';
-        }
-
-        function M() {
-            line2(mx[point_count - 1], my[point_count - 1], mx[0], my[0]);
-            mx[point_count] = mx[0];
-            my[point_count] = my[0];
-            console.log(mx, my);
-            var a = '';
-            a = a + '<tr>';
-            a = a + '<td>Участок</td>';
-            for (var i = 1; i <= point_count - 1; i++) {
-                a = a + '<td>' + (i - 1).toString() + '-' + i.toString() + '</td>';
-            }
-            a = a + '<td>' + (i - 1).toString() + '-0' + '</td>';
-            a = a + '</tr>';
-            a = a + '<tr>';
-            a = a + '<td>' + 'Длина, м' + '</td>';
-            for (var i = 0; i <= point_count - 1; i++) {
-                dist[i] = Math.sqrt(Math.pow(mx[i + 1] - mx[i], 2) + Math.pow(my[i + 1] - my[i], 2));
-                dist[i] = (dist[i] * 10 * 2.54) / 96;
-                a = a + '<td>' + Math.round(dist[i]) + '</td>';
-                summa = summa + Math.round(dist[i]);
-            }
-            a = a + '<td style="background-color: lime">' + summa + '</td>';
-            a = a + '</tr>';
-
-            document.getElementById('trajectory').innerHTML = a;
-            document.getElementById('info').style.display = 'block';
-
-
-        }
-
-        $("#type").change(function () {
-
-            if ($("#type").val() === 'Мультиротор') {
-                var b = '';
-                for (name in multirotors) {
-                    console.log(multirotors[name].name);
-                    b = b + '<option value="' + multirotors[name].name + '">' + multirotors[name].name +
-                        '</option>';
-                }
-                document.getElementById('bpla').innerHTML = b;
-                $("#bplam").text(multirotors[this.selectedIndex].m);
-                $("#bplat").text(multirotors[this.selectedIndex].tmax);
-                $("#bplah").text(multirotors[this.selectedIndex].h);
-                $("#bplar").text(multirotors[this.selectedIndex].r);
-                $("#bplatr").text(multirotors[this.selectedIndex].tr);
-                var c = '';
-                c = c + '<tr>';
-                c = c + '<td>Наименование</td>';
-                c = c + '<td>Ожидаемое время работы</td>';
-                c = c + '<td>Среднее время работы</td>';
-                c = c + '<td>P=0.25</td>';
-                c = c + '<td>P=0.5</td>';
-                c = c + '<td>P=0.75</td>';
-                c = c + '<td>P=0.99</td>';
-                c = c + '</tr>';
-                c = c + '<tr>';
-                c = c + '<td>' + multirotorsp[0].name + '</td>';
-                c = c + '<td>' + multirotorsp[0].to + '</td>';
-                c = c + '<td>' + multirotorsp[0].ts + '</td>';
-                c = c + '<td>' + multirotorsp[0].P1 + '</td>';
-                c = c + '<td>' + multirotorsp[0].P2 + '</td>';
-                c = c + '<td>' + multirotorsp[0].P3 + '</td>';
-                c = c + '<td>' + multirotorsp[0].P4 + '</td>';
-
-                c = c + '</tr>';
-                document.getElementById('ver').innerHTML = c;
-            }
-            if ($("#type").val() === 'Самолет') {
-                var b = '';
-                for (name in planes) {
-                    console.log(planes[name].name);
-                    b = b + '<option value="' + planes[name].name + '">' + planes[name].name + '</option>';
-                }
-                document.getElementById('bpla').innerHTML = b;
-                $("#bplam").text(planes[this.selectedIndex].m);
-                $("#bplat").text(planes[this.selectedIndex].tmax);
-                $("#bplah").text(planes[this.selectedIndex].h);
-                $("#bplar").text(planes[this.selectedIndex].r);
-                $("#bplatr").text(planes[this.selectedIndex].tr);
-                var c = '';
-                c = c + '<tr>';
-                c = c + '<td>Наименование</td>';
-                c = c + '<td>Ожидаемое время работы</td>';
-                c = c + '<td>Среднее время работы</td>';
-                c = c + '<td>P=0.25</td>';
-                c = c + '<td>P=0.5</td>';
-                c = c + '<td>P=0.75</td>';
-                c = c + '<td>P=0.99</td>';
-                c = c + '</tr>';
-                c = c + '<tr>';
-                c = c + '<td>' + planesp[0].name + '</td>';
-                c = c + '<td>' + planesp[0].to + '</td>';
-                c = c + '<td>' + planesp[0].ts + '</td>';
-                c = c + '<td>' + planesp[0].P1 + '</td>';
-                c = c + '<td>' + planesp[0].P2 + '</td>';
-                c = c + '<td>' + planesp[0].P3 + '</td>';
-                c = c + '<td>' + planesp[0].P4 + '</td>';
-
-                c = c + '</tr>';
-                document.getElementById('ver').innerHTML = c;
-            }
-
-            if ($("#type").val() === 'Вертолет') {
-                var b = '';
-                for (name in helicopters) {
-                    console.log(helicopters[name].name);
-                    b = b + '<option value="' + helicopters[name].name + '">' + helicopters[name].name +
-                        '</option>';
-                }
-                document.getElementById('bpla').innerHTML = b;
-                $("#bplam").text(helicopters[this.selectedIndex].m);
-                $("#bplat").text(helicopters[this.selectedIndex].tmax);
-                $("#bplah").text(helicopters[this.selectedIndex].h);
-                $("#bplar").text(helicopters[this.selectedIndex].r);
-                $("#bplatr").text(helicopters[this.selectedIndex].tr);
-                var c = '';
-                c = c + '<tr>';
-                c = c + '<td>Наименование</td>';
-                c = c + '<td>Ожидаемое время работы</td>';
-                c = c + '<td>Среднее время работы</td>';
-                c = c + '<td>P=0.25</td>';
-                c = c + '<td>P=0.5</td>';
-                c = c + '<td>P=0.75</td>';
-                c = c + '<td>P=0.99</td>';
-                c = c + '</tr>';
-                c = c + '<tr>';
-                c = c + '<td>' + helicoptersp[0].name + '</td>';
-                c = c + '<td>' + helicoptersp[0].to + '</td>';
-                c = c + '<td>' + helicoptersp[0].ts + '</td>';
-                c = c + '<td>' + helicoptersp[0].P1 + '</td>';
-                c = c + '<td>' + helicoptersp[0].P2 + '</td>';
-                c = c + '<td>' + helicoptersp[0].P3 + '</td>';
-                c = c + '<td>' + helicoptersp[0].P4 + '</td>';
-
-                c = c + '</tr>';
-                document.getElementById('ver').innerHTML = c;
-            }
-        });
-
-        $("#bpla").change(function () {
-
-            if ($("#type").val() === 'Мультиротор') {
-                console.log(this.selectedIndex);
-                $("#bplam").text(multirotors[this.selectedIndex].m);
-                $("#bplat").text(multirotors[this.selectedIndex].tmax);
-                $("#bplah").text(multirotors[this.selectedIndex].h);
-                $("#bplar").text(multirotors[this.selectedIndex].r);
-                $("#bplatr").text(multirotors[this.selectedIndex].tr);
-
-                
-                var c = '';
-                c = c + '<tr>';
-                c = c + '<td>Наименование</td>';
-                c = c + '<td>Ожидаемое время работы</td>';
-                c = c + '<td>Среднее время работы</td>';
-                c = c + '<td>P=0.25</td>';
-                c = c + '<td>P=0.5</td>';
-                c = c + '<td>P=0.75</td>';
-                c = c + '<td>P=0.99</td>';
-                c = c + '</tr>';
-                c = c + '<tr>';
-                c = c + '<td>' + multirotorsp[this.selectedIndex].name + '</td>';
-                c = c + '<td>' + multirotorsp[this.selectedIndex].to + '</td>';
-                c = c + '<td>' + multirotorsp[this.selectedIndex].ts + '</td>';
-                c = c + '<td>' + multirotorsp[this.selectedIndex].P1 + '</td>';
-                c = c + '<td>' + multirotorsp[this.selectedIndex].P2 + '</td>';
-                c = c + '<td>' + multirotorsp[this.selectedIndex].P3 + '</td>';
-                c = c + '<td>' + multirotorsp[this.selectedIndex].P4 + '</td>';
-
-                c = c + '</tr>';
-                document.getElementById('ver').innerHTML = c;
-            }
-
-            if ($("#type").val() === 'Самолет') {
-                console.log(this.selectedIndex);
-                $("#bplam").text(planes[this.selectedIndex].m);
-                $("#bplat").text(planes[this.selectedIndex].tmax);
-                $("#bplah").text(planes[this.selectedIndex].h);
-                $("#bplar").text(planes[this.selectedIndex].r);
-                $("#bplatr").text(planes[this.selectedIndex].tr);
-                var c = '';
-                c = c + '<tr>';
-                c = c + '<td>Наименование</td>';
-                c = c + '<td>Ожидаемое время работы</td>';
-                c = c + '<td>Среднее время работы</td>';
-                c = c + '<td>P=0.25</td>';
-                c = c + '<td>P=0.5</td>';
-                c = c + '<td>P=0.75</td>';
-                c = c + '<td>P=0.99</td>';
-                c = c + '</tr>';
-                c = c + '<tr>';
-                c = c + '<td>' + planesp[this.selectedIndex].name + '</td>';
-                c = c + '<td>' + planesp[this.selectedIndex].to + '</td>';
-                c = c + '<td>' + planesp[this.selectedIndex].ts + '</td>';
-                c = c + '<td>' + planesp[this.selectedIndex].P1 + '</td>';
-                c = c + '<td>' + planesp[this.selectedIndex].P2 + '</td>';
-                c = c + '<td>' + planesp[this.selectedIndex].P3 + '</td>';
-                c = c + '<td>' + planesp[this.selectedIndex].P4 + '</td>';
-
-                c = c + '</tr>';
-                document.getElementById('ver').innerHTML = c;
-            }
-
-            if ($("#type").val() === 'Вертолет') {
-                console.log(this.selectedIndex);
-                $("#bplam").text(helicopters[this.selectedIndex].m);
-                $("#bplat").text(helicopters[this.selectedIndex].tmax);
-                $("#bplah").text(helicopters[this.selectedIndex].h);
-                $("#bplar").text(helicopters[this.selectedIndex].r);
-                $("#bplatr").text(helicopters[this.selectedIndex].tr);
-                var c = '';
-                c = c + '<tr>';
-                c = c + '<td>Наименование</td>';
-                c = c + '<td>Ожидаемое время работы</td>';
-                c = c + '<td>Среднее время работы</td>';
-                c = c + '<td>P=0.25</td>';
-                c = c + '<td>P=0.5</td>';
-                c = c + '<td>P=0.75</td>';
-                c = c + '<td>P=0.99</td>';
-                c = c + '</tr>';
-                c = c + '<tr>';
-                c = c + '<td>' + helicoptersp[this.selectedIndex].name + '</td>';
-                c = c + '<td>' + helicoptersp[this.selectedIndex].to + '</td>';
-                c = c + '<td>' + helicoptersp[this.selectedIndex].ts + '</td>';
-                c = c + '<td>' + helicoptersp[this.selectedIndex].P1 + '</td>';
-                c = c + '<td>' + helicoptersp[this.selectedIndex].P2 + '</td>';
-                c = c + '<td>' + helicoptersp[this.selectedIndex].P3 + '</td>';
-                c = c + '<td>' + helicoptersp[this.selectedIndex].P4 + '</td>';
-                c = c + '</tr>';
-                document.getElementById('ver').innerHTML = c;
-            }
-        });
-
-        function circle2(x, y, r, color) {
-            point_context.beginPath();
-            point_context.arc(x, y, r, 0, 2 * Math.PI, false);
-            point_context.fillStyle = color;
-            point_context.fill();
-        }
-
-        function line2(tempX, tempY, x2, y2) {
-            point_context.beginPath();
-            point_context.strokeStyle = 'red';
-            point_context.lineWidth = 2;
-            point_context.moveTo(tempX, tempY);
-            point_context.lineTo(x2, y2);
-            point_context.stroke();
-        }
-
-        function SetText(x, y) {
-            point_context.beginPath();
-            point_context.strokeStyle = 'black';
-            point_context.fillStyle = 'black';
-            point_context.font = "20px Arial";
-            point_context.fillText(point_count, x - 6, y - 8);
-        }
-
-        function Res() {
-            var T1 = document.getElementById('t1').value;
-            var T2 = document.getElementById('t2').value;
-            var T3 = document.getElementById('t3').value;
-            var T4 = document.getElementById('t4').value;
-            var m = Math.ceil((parseInt(T1) + parseInt(T3) + parseInt(T4)) / parseInt(T2)) + 1;
-            $("#nbpla").text(m);
-        }
-    </script>
-    <script src="chart.js@2.8.0"></script>
+  </div>
 </body>
-
 </html>
