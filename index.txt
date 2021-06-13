@@ -297,7 +297,7 @@ if ('serviceWorker' in navigator) {
             a = a + '<td>' + 'Длина, м' + '</td>';
             for (var i = 0; i <= point_count - 1; i++) {
                 dist[i] = Math.sqrt(Math.pow(mx[i + 1] - mx[i], 2) + Math.pow(my[i + 1] - my[i], 2));
-                dist[i] = (dist[i] * mH * 2.54) / 96;
+                dist[i] = (dist[i] * 10 * 2.54) / 96;
                 a = a + '<td>' + Math.round(dist[i]) + '</td>';
                 summa = summa + Math.round(dist[i]);
             }
